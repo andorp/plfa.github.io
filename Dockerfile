@@ -1,8 +1,9 @@
-FROM gitpod/workspace-full
-
-USER root
-
+FROM ubuntu:20.10
+ARG DEBIAN_FRONTEND=noninteractive
 ENV PATH="$PATH:/root/.local/bin"
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
 RUN mkdir /root/.agda \
  && mkdir /plfa \
  && mkdir /plfa/init
@@ -12,6 +13,7 @@ COPY hello.agda /plfa/init/hello.agda
 COPY nats.agda /plfa/init/nats.agda
 RUN apt-get update \
  && apt-get install -y curl git emacs locales libtinfo-dev \
+ && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
  && dpkg-reconfigure --frontend=noninteractive locales \
  && update-locale LANG=en_US.UTF-8 \
  && curl -sSL https://get.haskellstack.org/ | sh \
