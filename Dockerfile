@@ -1,9 +1,5 @@
-FROM ubuntu:20.10
-ARG DEBIAN_FRONTEND=noninteractive
+FROM gitpod/workspace-full
 ENV PATH="$PATH:/root/.local/bin"
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
 RUN mkdir /root/.agda \
  && mkdir /plfa \
  && mkdir /plfa/init
